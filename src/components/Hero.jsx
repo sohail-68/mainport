@@ -1,49 +1,59 @@
 import { motion } from "framer-motion";
-
-import { styles } from "../styles";
-import { ComputersCanvas } from "./canvas";
+import  Computers  from "./canvas/Earth.jsx";
 
 const Hero = () => {
   return (
-    <section className={`relative w-full h-screen mx-auto`}>
-      <div
-        className={`absolute inset-0 top-[120px]  max-w-7xl mx-auto ${styles.paddingX} flex flex-row items-start gap-5`}
-      >
-        <div className='flex flex-col justify-center items-center mt-5'>
-          <div className='w-5 h-5 rounded-full bg-[#915EFF]' />
-          <div className='w-1 sm:h-80 h-40 violet-gradient' />
+    <section
+      className="relative h-screen w-full 
+                 bg-[url('/images/bg.png')] bg-no-repeat bg-cover bg-center 
+                 text-white overflow-hidden"
+    >
+      {/* Background Overlay */}
+      <div className="absolute inset-0 bg-black/60 z-0" />
+
+      {/* Container */}
+    <div className=" h-full lg:py-10 max-lg:py-20  px-6">
+        <div className="relative max-w-7xl mx-auto h-full flex flex-col lg:flex-row items-center justify-between  z-10">
+        
+        {/* LEFT: Text Content */}
+        <div className="flex flex-col justify-center items-start w-full lg:w-1/2 h-full">
+          <motion.h1
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7 }}
+            className="text-4xl sm:text-6xl font-bold leading-tight text-white"
+          >
+            Hey, I'm <span className="text-emerald-400">Sohail</span>
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.9, delay: 0.2 }}
+            className="mt-4 text-lg sm:text-xl text-gray-300 max-w-xl"
+          >
+            I'm a results-driven{" "}
+            <span className="text-emerald-300">MERN Stack Developer</span>{" "}
+            specializing in building fast, scalable, and elegant web applications.
+            <br className="hidden sm:inline-block" />
+            From powerful APIs to sleek, responsive UIs — I turn complex problems into
+            seamless digital experiences.
+          </motion.p>
+
+          <button
+            className="bg-white text-black px-6 py-3 rounded-lg mt-6 font-semibold
+                       transition-transform duration-300 hover:scale-105 hover:shadow-lg active:scale-95"
+          >
+            Contact Me
+          </button>
         </div>
 
-        <div>
-          <h1 className={`${styles.heroHeadText} text-white`}>
-            Hi, I'm <span className='text-[#915EFF]'>Adrian</span>
-          </h1>
-          <p className={`${styles.heroSubText} mt-2 text-white-100`}>
-            I develop 3D visuals, user <br className='sm:block hidden' />
-            interfaces and web applications
-          </p>
+        {/* RIGHT: 3D Canvas */}
+        <div className="flex justify-center items-center w-full lg:w-1/2 h-[300px] sm:h-[500px] lg:h-full mt-10 lg:mt-0">
+          <Computers />
         </div>
       </div>
-
-      <ComputersCanvas />
-
-      <div className='absolute xs:bottom-10 bottom-32 w-full flex justify-center items-center'>
-        <a href='#about'>
-          <div className='w-[35px] h-[64px] rounded-3xl border-4 border-secondary flex justify-center items-start p-2'>
-            <motion.div
-              animate={{
-                y: [0, 24, 0],
-              }}
-              transition={{
-                duration: 1.5,
-                repeat: Infinity,
-                repeatType: "loop",
-              }}
-              className='w-3 h-3 rounded-full bg-secondary mb-1'
-            />
-          </div>
-        </a>
-      </div>
+    </div>
     </section>
   );
 };

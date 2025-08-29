@@ -7,6 +7,8 @@ import { github } from "../assets";
 import { SectionWrapper } from "../hoc";
 import { projects } from "../constants";
 import { fadeIn, textVariant } from "../utils/motion";
+import { useScroll } from "../contexts/ScrollContext";
+
 
 const ProjectCard = ({
   index,
@@ -24,7 +26,7 @@ const ProjectCard = ({
           scale: 1,
           speed: 450,
         }}
-        className='bg-tertiary p-5 rounded-2xl sm:w-[360px] w-full'
+        className='bg-[#1a1a1a] p-5 rounded-2xl sm:w-[360px] w-full'
       >
         <div className='relative w-full h-[230px]'>
           <img
@@ -68,6 +70,7 @@ const ProjectCard = ({
 };
 
 const Works = () => {
+  
   return (
     <>
       <motion.div variants={textVariant()}>

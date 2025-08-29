@@ -1,99 +1,94 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
 import { styles } from "../styles";
 import { navLinks } from "../constants";
 import { logo, menu, close } from "../assets";
 
 const Navbar = () => {
-  const [active, setActive] = useState("");
+  const [active, setActive] = useState("Home");
   const [toggle, setToggle] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      if (scrollTop > 100) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-    };
-
+    const handleScroll = () => setScrolled(window.scrollY > 80);
     window.addEventListener("scroll", handleScroll);
-
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const handleNavClick = (title) => {
+    setActive(title);
+    setToggle(false);
+  };
+
   return (
     <nav
-      className={`${
-        styles.paddingX
-      } w-full flex items-center py-5 fixed top-0 z-20 ${
-        scrolled ? "bg-primary" : "bg-transparent"
-      }`}
+      className={`
+        ${styles.paddingX} fixed px-8 top-0 w-full z-50
+        transition-all duration-300
+        ${scrolled ? "bg-black/80 backdrop-blur-md shadow-md" : "bg-transparent"}
+        py-4
+      `}
     >
-      <div className='w-full flex justify-between items-center max-w-7xl mx-auto'>
+      <div className="max-w-7xl mx-auto flex justify-between items-center">
+        {/* Logo */}
         <Link
-          to='/'
-          className='flex items-center gap-2'
+          to="/"
+          className="flex items-center gap-2"
           onClick={() => {
-            setActive("");
-            window.scrollTo(0, 0);
+            setActive("Home");
+            window.scrollTo({ top: 0, behavior: "smooth" });
           }}
         >
-          <img src={logo} alt='logo' className='w-9 h-9 object-contain' />
-          <p className='text-white text-[18px] font-bold cursor-pointer flex '>
-            Adrian &nbsp;
-            <span className='sm:block hidden'> | JavaScript Mastery</span>
-          </p>
+          <span className="text-white text-xl font-bold tracking-wide">
+            Sohail <span className="hidden sm:inline-block">| Dev Portfolio</span>
+          </span>
         </Link>
 
-        <ul className='list-none hidden sm:flex flex-row gap-10'>
+        {/* Desktop Navigation */}
+        <ul className="hidden md:flex gap-10 items-center ">
           {navLinks.map((nav) => (
             <li
               key={nav.id}
-              className={`${
-                active === nav.title ? "text-white" : "text-secondary"
-              } hover:text-white text-[18px] font-medium cursor-pointer`}
-              onClick={() => setActive(nav.title)}
+              className={`text-base font-medium cursor-pointer border-b-2 transition-all duration-200 ${
+                active === nav.title
+                  ? "text-white border-white"
+                  : "text-gray-400 border-transparent hover:text-white hover:border-white"
+              }`}
+              onClick={() => handleNavClick(nav.title)}
             >
               <a href={`#${nav.id}`}>{nav.title}</a>
             </li>
           ))}
         </ul>
 
-        <div className='sm:hidden flex flex-1 justify-end items-center'>
+        {/* Mobile Menu Icon */}
+        <div className="md:hidden  flex items-center">
           <img
             src={toggle ? close : menu}
-            alt='menu'
-            className='w-[28px] h-[28px] object-contain'
+            alt="menu"
+            className="w-7 h-7 cursor-pointer"
             onClick={() => setToggle(!toggle)}
           />
+        </div>
 
-          <div
-            className={`${
-              !toggle ? "hidden" : "flex"
-            } p-6 black-gradient absolute top-20 right-0 mx-4 my-2 min-w-[140px] z-10 rounded-xl`}
-          >
-            <ul className='list-none flex justify-end items-start flex-1 flex-col gap-4'>
+        {/* Mobile Dropdown */}
+        {toggle && (
+          <div className="absolute top-16 right-5 w-60 bg-[#1f1f1f] border border-gray-700 rounded-xl p-6 shadow-lg z-50 md:hidden ">
+            <ul className="flex flex-col gap-4">
               {navLinks.map((nav) => (
                 <li
                   key={nav.id}
-                  className={`font-poppins font-medium cursor-pointer text-[16px] ${
-                    active === nav.title ? "text-white" : "text-secondary"
-                  }`}
-                  onClick={() => {
-                    setToggle(!toggle);
-                    setActive(nav.title);
-                  }}
+                  className={`text-base font-medium cursor-pointer transition-colors ${
+                    active === nav.title ? "text-white" : "text-gray-300"
+                  } hover:text-white`}
+                  onClick={() => handleNavClick(nav.title)}
                 >
                   <a href={`#${nav.id}`}>{nav.title}</a>
                 </li>
               ))}
             </ul>
           </div>
-        </div>
+        )}
       </div>
     </nav>
   );

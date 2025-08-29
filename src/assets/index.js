@@ -29,25 +29,49 @@ import tesla from "./company/tesla.png";
 import carrent from "./carrent.png";
 import jobit from "./jobit.png";
 import tripguide from "./tripguide.png";
+import React from "./React.svg";
+import React1 from "./React.svg";
+import Node from "./Node.js.svg";
+import MongoDB from "./MongoDB.svg";
+import Bootstrap from "./Bootstrap.svg";
+import download from "./download.png";
+// import chatgram from "./download.png";
+import Admin from "./admin.png";
+import Webweb from "./webweb.png";
+import Chatgram from "./chatgram.png";
+import Salah from "./salah.jpg";
+import Ngo from "./ngo.png";
+
 
 export {
   logo,
   backend,
+  Salah,
+  Ngo,
   creator,
   mobile,
   web,
+  React1,
+  download,
+  MongoDB,
+  Admin,
+  Chatgram,
+  Webweb,
   github,
   menu,
   close,
+  Node,
   css,
   docker,
   figma,
   git,
   html,
+  Bootstrap,
   javascript,
   mongodb,
   nodejs,
   reactjs,
+  React,
   redux,
   tailwind,
   typescript,
