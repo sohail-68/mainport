@@ -1,5 +1,5 @@
 import React from "react";
-import Tilt from "react-tilt";
+import Tilt from "react-parallax-tilt"; // ✅ react-tilt replace
 import { motion } from "framer-motion";
 
 import { services } from "../constants";
@@ -8,7 +8,13 @@ import { fadeIn, textVariant } from "../utils/motion";
 
 // Card Component
 const ServiceCard = ({ index, title, icon }) => (
-  <Tilt className="w-full sm:w-[260px]">
+  <Tilt
+    tiltMaxAngleX={25} // ✅ props updated
+    tiltMaxAngleY={25}
+    scale={1}
+    transitionSpeed={400}
+    className="w-full sm:w-[260px]"
+  >
     <motion.div
       variants={fadeIn("up", "spring", index * 0.2, 0.75)}
       className="bg-gradient-to-br from-[#2d2d2d] via-[#1f1f1f] to-[#161616] 
@@ -16,11 +22,6 @@ const ServiceCard = ({ index, title, icon }) => (
                  transition-all duration-300 transform hover:scale-105"
     >
       <div
-        options={{
-          max: 25,
-          scale: 1,
-          speed: 400,
-        }}
         className="hover:bg-[#2a2a2a] rounded-xl py-10 px-6 
                    flex flex-col items-center justify-center h-[260px] 
                    transition-colors duration-300"
