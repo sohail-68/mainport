@@ -33,18 +33,7 @@ const ProjectCard = ({
             className="w-full h-full object-cover rounded-2xl"
           />
 
-          <div className="absolute inset-0 flex justify-end m-3 card-img_hover">
-            <div
-              onClick={() => window.open(source_code_link, "_blank")}
-              className="black-gradient w-10 h-10 rounded-full flex justify-center items-center cursor-pointer"
-            >
-              <img
-                src={github}
-                alt="source code"
-                className="w-1/2 h-1/2 object-contain"
-              />
-            </div>
-          </div>
+         
         </div>
 
         <div className="mt-5">
@@ -69,8 +58,8 @@ const ProjectCard = ({
 
 const Works = () => {
   return (
-    <div className="px-6">
-    <div className="max-w-7xl mx-auto relative">
+   <div className="px-6">
+     <div className="max-w-7xl mx-auto">
       <motion.div variants={textVariant()}>
         <p className={`${styles.sectionSubText} `}>My work</p>
         <h2 className={`${styles.sectionHeadText}`}>Projects.</h2>
@@ -95,8 +84,7 @@ const Works = () => {
         ))}
       </div>
     </div>
-    </div>
-      
+   </div>
   );
 };
 
